@@ -17,6 +17,6 @@ lang: ''
 
 # 原理
 
-采用Vercel Function登录S3，获取文件列表传递给前端拼接URL显示，原项目是对接的OneDrive：[iRedScarf/onedrive-index: OneDrive public directory listing, and One-Click Deploy to Vercel. Powered by Vercel and Next.js.](https://github.com/iRedScarf/onedrive-index)。本项目仅更改了后端对接的存储类型，里路上你可以三改后对接任意存储...
+采用Vercel Function登录S3，获取文件列表传递给前端拼接URL显示，原项目是对接的OneDrive：[iRedScarf/onedrive-index: OneDrive public directory listing, and One-Click Deploy to Vercel. Powered by Vercel and Next.js.](https://github.com/iRedScarf/onedrive-index)。本项目仅更改了后端对接的存储类型，理论上你可以三改后对接任意存储...
 
 ~~本人想对接天翼云盘PC的驱动，但是登录鉴权一直不会做，有没有人来帮帮我（）~~
