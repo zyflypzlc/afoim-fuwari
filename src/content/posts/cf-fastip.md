@@ -22,7 +22,7 @@ title: 试试Cloudflare IP优选！让Cloudflare在国内再也不是减速器�
 
 结论：可见，优选过的网站响应速度有很大提升，并且出口IP也变多了。这能让你的网站可用性大大提高，并且加载速度显著变快。
 
-Cloudflare 优选域名：[记录 - AcoFork Blog](https://afo.im/posts/record/#cloudflare-%E4%BC%98%E9%80%89%E5%9F%9F%E5%90%8D)
+Cloudflare 优选域名：[记录 - AcoFork Blog](/posts/record/#cloudflare-%E4%BC%98%E9%80%89%E5%9F%9F%E5%90%8D)
 
 ---
 
