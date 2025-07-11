@@ -160,13 +160,32 @@ const bannerOffset =
 		<slot name="head"></slot>
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
-
-		<!-- Umami分析 -->
+		<!-- Umami分析（云） -->
 		<script defer src="https://cloud.umami.is/script.js" data-website-id="a66a5fd4-98b0-4108-8606-cb7094f380ac"></script>
+		<!-- Umami分析（自建） -->
+		<script defer src="https://umami.afo.im/script.js" data-website-id="4b4e430d-a12c-4a5c-8cf9-df48eb20fd6d"></script>
 		<!-- 谷歌广告 -->
 		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2618491437522884"
      crossorigin="anonymous"></script>
-     	<meta name="google-adsense-account" content="ca-pub-2618491437522884">
+		<!-- 百度统计 -->
+		<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7392f20da43a99aa47b160254d891c3c";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+		<!-- 谷歌分析 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9Z4LT4H8KH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9Z4LT4H8KH');
+</script>
 
 	</head>
 	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
