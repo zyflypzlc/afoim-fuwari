@@ -46,9 +46,15 @@ const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
 	try {
 		const searchResults = posts
 			.filter((post) => {
+				const keywordLower = keyword.toLowerCase();
 				const searchText =
 					`${post.title} ${post.description} ${post.content}`.toLowerCase();
-				return searchText.includes(keyword.toLowerCase());
+				const urlPath = `/posts/${post.link}`;
+				
+				// 支持内容搜索和URL后缀搜索
+				return searchText.includes(keywordLower) || 
+					   urlPath.toLowerCase().includes(keywordLower) ||
+					   post.link.toLowerCase().includes(keywordLower);
 			})
 			.map((post) => {
 				const contentLower = post.content.toLowerCase();
@@ -71,7 +77,8 @@ const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
 					meta: {
 						title: post.title
 					},
-					excerpt: highlightText(excerpt, keyword)
+					excerpt: highlightText(excerpt, keyword),
+					urlPath: `/posts/${post.link}`
 				};
 			});
 
@@ -163,6 +170,9 @@ top-20 left-4 md:left-[unset] right-4 shadow-2xl rounded-2xl p-2">
        rounded-xl text-lg px-3 py-2 hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]">
             <div class="transition text-90 inline-flex font-bold group-hover:text-[var(--primary)]">
                 {item.meta.title}<Icon icon="fa6-solid:chevron-right" class="transition text-[0.75rem] translate-x-1 my-auto text-[var(--primary)]"></Icon>
+            </div>
+            <div class="transition text-xs text-white mb-1 font-mono">
+                {item.urlPath}
             </div>
             <div class="transition text-sm text-50">
                 {@html item.excerpt}

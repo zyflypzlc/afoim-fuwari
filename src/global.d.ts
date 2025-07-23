@@ -20,6 +20,7 @@ interface SearchResult {
 		title: string;
 	};
 	excerpt: string;
+	urlPath?: string;
 	content?: string;
 	word_count?: number;
 	filters?: Record<string, unknown>;
