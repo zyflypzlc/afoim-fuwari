@@ -10,7 +10,7 @@ import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
 	title: "二叉树树的博客",
-	// subtitle: "❤",
+	subtitle: "❤",
 	description:
 		"分享网络技术、服务器部署、内网穿透、静态网站搭建、CDN优化、容器化部署等技术教程与实践经验的个人技术博客，专注于云原生、无服务器架构和前后端开发，作者为afoim/二叉树树",
 
@@ -176,6 +176,15 @@ export const siteConfig: SiteConfig = {
 
 			url: "https://www.pixiv.net/artworks/122782209", // (Optional) URL link to the original artwork or artist's page
 		},
+	},
+	background: {
+		enable: true, // Enable background image
+		src: "https://pic.2x.nz/?img=h", // Background image URL (supports HTTPS)
+		position: "center", // Background position: 'top', 'center', 'bottom'
+		size: "cover", // Background size: 'cover', 'contain', 'auto'
+		repeat: "no-repeat", // Background repeat: 'no-repeat', 'repeat', 'repeat-x', 'repeat-y'
+		attachment: "fixed", // Background attachment: 'fixed', 'scroll', 'local'
+		opacity: 0.5, // Background opacity (0-1)
 	},
 	toc: {
 		enable: true, // Display the table of contents on the right side of the post
