@@ -65,7 +65,7 @@ lang: ''
 
 创建项目，选择 **Web Services**
 
-**Source Code** 选择 **Exist Image** ，并输入 `ghcr.io/umami-software/umami:mysql-v2.19.0` *最好选最新版，也就是 `vx.xx.x` 这个字段*
+**Source Code** 选择 **Exist Image** ，并输入 `ghcr.io/umami-software/umami:postgresql-v2.19.0` *最好选最新版，也就是 `vx.xx.x` 这个字段*
 
 配置必须的环境变量
 
