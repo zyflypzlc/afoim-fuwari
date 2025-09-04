@@ -114,3 +114,8 @@ export type BlogPostData = {
 export type ExpressiveCodeConfig = {
 	theme: string;
 };
+
+export type GitHubEditConfig = {
+	enable: boolean;
+	baseUrl: string;
+};

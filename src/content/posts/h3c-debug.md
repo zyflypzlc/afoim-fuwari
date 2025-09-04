@@ -65,7 +65,7 @@ lang: ''
 
 进入下述网址，你就能看到Telnet开关，打开即可
 
-```url
+```bash
 https://192.168.124.1/debug.asp
 ```
 

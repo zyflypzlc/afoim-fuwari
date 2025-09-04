@@ -24,7 +24,7 @@ lang: ''
 
 我是这样写的
 
-```textile
+```bash
 Open Source Team Application
 Applicant Name: no name provided
 Applicant Email: acofork@gmail.com

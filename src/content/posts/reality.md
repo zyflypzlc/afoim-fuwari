@@ -66,7 +66,7 @@ x-ui vX.X.X installation finished, it is running now...
 
 然后访问面板。其中 `WebBasePath` 在安装后会展示
 
-```url
+```bash
 https://公网IP:面板端口/WebBasePath
 ```
 

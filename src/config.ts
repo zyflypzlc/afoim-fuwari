@@ -1,5 +1,6 @@
 import type {
     ExpressiveCodeConfig,
+	GitHubEditConfig,
 	ImageFallbackConfig,
 	LicenseConfig,
 	NavBarConfig,
@@ -11,6 +12,7 @@ import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
 	title: "AcoFork Blog",
+	subtitle: "技术分享与实践",
 	description:
 		"分享网络技术、服务器部署、内网穿透、静态网站搭建、CDN优化、容器化部署等技术教程与实践经验的个人技术博客，专注于云原生、无服务器架构和前后端开发，作者为afoim/二叉树树",
 
@@ -123,4 +125,9 @@ export const umamiConfig: UmamiConfig = {
 
 export const expressiveCodeConfig: ExpressiveCodeConfig = {
 	theme: "github-dark",
+};
+
+export const gitHubEditConfig: GitHubEditConfig = {
+	enable: true,
+	baseUrl: "https://github.com/afoim/fuwari/blob/main/src/content/posts",
 };

@@ -7,7 +7,7 @@ import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { getSortedPosts } from "@utils/content-utils";
 import { getDir, getPostUrlBySlug } from "@utils/url-utils";
 import { Icon } from "astro-icon/components";
-import { licenseConfig } from "src/config";
+import { gitHubEditConfig, licenseConfig } from "src/config";
 import PostMetadata from "../../components/PostMeta.astro";
 import ImageWrapper from "../../components/misc/ImageWrapper.astro";
 import { profileConfig, siteConfig } from "../../config";
@@ -116,9 +116,29 @@ const jsonLd = {
                 <Content />
             </Markdown>
 
-
-
-            {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
+            <!-- GitHub 编辑链接 -->
+            {gitHubEditConfig.enable && (
+                <div class="mb-6 p-4 rounded-xl bg-[var(--license-block-bg)] border border-[var(--line-divider)] onload-animation">
+                    <div class="flex items-center gap-3">
+                        <div class="h-5 w-5 rounded bg-[var(--primary)] flex items-center justify-center">
+                            <Icon name="material-symbols:edit-outline" class="text-[0.875rem] text-white dark:text-black/70"></Icon>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-black/80 dark:text-white/80 text-sm mb-1">发现错误或想要改进这篇文章？</p>
+                            <a 
+                                href={`${gitHubEditConfig.baseUrl}/${entry.slug}.md`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-flex items-center gap-1 text-[var(--primary)] hover:text-[oklch(0.65_0.16_var(--hue))] text-sm font-medium transition-colors"
+                            >
+                                <Icon name="fa6-brands:github" class="text-[0.875rem]"></Icon>
+                                在 GitHub 上编辑此页
+                                <Icon name="material-symbols:open-in-new" class="text-[0.75rem]"></Icon>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            )}
             
             <!-- 文章帮助反馈区域 -->
             <div class="mb-4 p-3 rounded-lg bg-[var(--license-block-bg)] border border-[var(--line-divider)] onload-animation">
@@ -141,6 +161,10 @@ const jsonLd = {
                     </div>
                 </div>
             </div>
+
+            {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
+            
+
             
             <!-- Giscus 评论区 -->
             <script src="https://giscus.app/client.js"

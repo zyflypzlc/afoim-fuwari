@@ -68,7 +68,7 @@ lang: ''
 
 获取必要信息，发起更改SSL提供商请求
 
-```curl
+```bash
 curl --location --request PATCH 'https://api.cloudflare.com/client/v4/zones/<zone_id>/ssl/universal/settings' --header 'X-Auth-Email: 你的CF注册邮箱' --header 'X-Auth-Key: 你的CF全局APIKey' --header 'Content-Type: application/json' --data-raw '{"enabled":true,"certificate_authority":"ssl_com"}'
 ```
 
