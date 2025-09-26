@@ -44,6 +44,11 @@
       "source": "/yyb",
       "destination": "https://www.rainyun.com/acofork_?s=bilibili",
       "permanent": false
+    },
+    {
+      "source": "/iku",
+      "destination": "https://ikuuu.de/auth/register?code=Bjou",
+      "permanent": false
     }
   ]
 }
