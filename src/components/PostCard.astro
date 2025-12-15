@@ -15,7 +15,6 @@ interface Props {
 	url: string;
 	published: Date;
 	updated?: Date;
-	tags: string[];
 	image: string;
 	description: string;
 	draft: boolean;
@@ -27,7 +26,6 @@ const {
 	url,
 	published,
 	updated,
-	tags,
 	image,
 	description,
 	style,
@@ -57,7 +55,7 @@ const { remarkPluginFrontmatter } = await entry.render();
         </a>
 
         <!-- metadata -->
-        <PostMetadata published={published} updated={updated} tags={tags} hideTagsForMobile={true} hideUpdateDate={true} slug={entry.slug} class="mb-2 md:mb-4"></PostMetadata>
+        <PostMetadata published={published} updated={updated} hideUpdateDate={true} slug={entry.slug} class="mb-2 md:mb-4"></PostMetadata>
 
         <!-- description -->
         <div class:list={["transition text-75 mb-3.5 pr-4 line-clamp-1 md:line-clamp-2"]}>
