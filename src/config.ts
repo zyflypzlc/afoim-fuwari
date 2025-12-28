@@ -36,7 +36,7 @@ export const siteConfig: SiteConfig = {
 		},
 	},
 	background: {
-		enable: false, // Enable background image
+		enable: true, // Enable background image
 		src: "", // Background image URL (supports HTTPS)
 		position: "center", // Background position: 'top', 'center', 'bottom'
 		size: "cover", // Background size: 'cover', 'contain', 'auto'
