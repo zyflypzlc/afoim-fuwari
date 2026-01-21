@@ -100,6 +100,16 @@ export const profileConfig: ProfileConfig = {
 	bio: "Protect What You Love.",
 	links: [
 		{
+			name: "QQ",
+			icon: "fa6-brands:qq",
+			url: "https://qm.qq.com/q/FWqOHlwL2m",
+		},
+		{
+			name: "Telegram",
+			icon: "fa6-brands:telegram",
+			url: "https://t.me/+_07DERp7k1ljYTc1",
+		},
+		{
 			name: "Bilibli",
 			icon: "fa6-brands:bilibili",
 			url: "https://space.bilibili.com/325903362",
