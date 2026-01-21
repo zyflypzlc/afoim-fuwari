@@ -31,7 +31,7 @@ This message is used to verify that this feed (feedId:236818461447222272) belong
 
 首先 你得有一个博客，或者说一个有RSS的网站
 
-比如 2x.nz/rss.xml
+比如 2x.nz/rss.xml 
 
 接下来在Folo处点击认证 https://folo.is
 
