@@ -14,7 +14,7 @@ import { LinkPreset } from "./types/config";
 export const noticeConfig: NoticeConfig = {
     enable: true,
     level: "warning",
-    content: "请注意，该博客对于每篇文章都是有评论区的，在确保你的网络可以访问 giscus.app 的情况下，如果你看不到或者必须手动刷新后才能看见，请反馈。",
+    content: "请注意，该博客对于每篇文章都是有评论区的，在确保你的网络可以访问 giscus.app 的情况下，如果你看不到或者必须手动刷新后才能看见，请反馈。<br>另外，如果你遇到了背景图被缩放的Bug，也请反馈。",
 };
 
 export const siteConfig: SiteConfig = {
