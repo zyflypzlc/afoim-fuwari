@@ -4,11 +4,18 @@ import type {
 	ImageFallbackConfig,
 	LicenseConfig,
 	NavBarConfig,
+	NoticeConfig,
 	ProfileConfig,
 	SiteConfig,
 	UmamiConfig,
 } from "./types/config";
 import { LinkPreset } from "./types/config";
+
+export const noticeConfig: NoticeConfig = {
+    enable: true,
+    level: "warning",
+    content: "请注意，该博客对于每篇文章都是有评论区的，如果你看不到或者必须手动刷新后才能看见，请反馈",
+};
 
 export const siteConfig: SiteConfig = {
 	title: "AcoFork Blog",

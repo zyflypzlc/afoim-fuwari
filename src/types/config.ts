@@ -123,3 +123,10 @@ export type GitHubEditConfig = {
 	enable: boolean;
 	baseUrl: string;
 };
+
+export type NoticeConfig = {
+    enable: boolean;
+    level: "info" | "note" | "tip" | "caution" | "warning" | "important";
+    content: string;
+};
+

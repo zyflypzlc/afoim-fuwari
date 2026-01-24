@@ -174,31 +174,4 @@ const sponsors = Object.values(
 .sponsor-card {
     @apply transition-all duration-200 hover:shadow-md hover:scale-105;
 }
-.crypto-info {
-    @apply space-y-3;
-}
-
-.wallet-address, .bybit-uid {
-    @apply text-center;
-}
-
-.copy-btn {
-    @apply transition-colors duration-200;
-}
-
-.copy-btn:hover {
-    color: var(--primary);
-    opacity: 0.8;
-}
 </style>
-
-<script>
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(function() {
-        // 可以添加复制成功的提示
-        alert('已复制到剪贴板');
-    }, function(err) {
-        console.error('复制失败: ', err);
-    });
-}
-</script>
