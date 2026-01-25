@@ -486,16 +486,21 @@
                     // New post
                     detectedChanges.push({ ...post, isUpdated: false });
                 } else {
-                    const dateUpdated = post.pubDate > stored.pubDate;
-                    const contentChanged = post.content && stored.content && post.content !== stored.content;
+                    // Check for ANY change (Title, Date, Description, Content)
+                    const titleChanged = post.title !== stored.title;
+                    const dateChanged = post.pubDate !== stored.pubDate;
+                    const descriptionChanged = post.description !== stored.description;
+                    const contentChanged = post.content !== stored.content;
                     
-                    if (contentChanged) {
-                        const diff = computeDiff(stored.content, post.content);
-                        if (diff) {
-                            detectedChanges.push({ ...post, isUpdated: true, diff });
-                        }
-                    } else if (dateUpdated) {
-                         detectedChanges.push({ ...post, isUpdated: true });
+                    if (titleChanged || dateChanged || descriptionChanged || contentChanged) {
+                        // Calculate diff only if content changed
+                        const diff = contentChanged ? computeDiff(stored.content, post.content) : null;
+                        
+                        detectedChanges.push({ 
+                            ...post, 
+                            isUpdated: true, 
+                            diff 
+                        });
                     }
                 }
             });

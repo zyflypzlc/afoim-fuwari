@@ -3,7 +3,7 @@ title: 加群向导
 image: /random/h
 published: 2025-05-24
 pinned: true
-description: 关于如何联系二叉树树~ 开始技术切磋！
+description: 关于如何联系二叉树树~
 ---
 
 
