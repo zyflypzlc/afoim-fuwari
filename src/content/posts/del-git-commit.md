@@ -168,3 +168,9 @@ Best regards,
 马上，你就会收到一封来自Github的邮件，表示Github已经收到您的工单。耐心等待Github的下一步回复即可
 
 ![](../assets/images/del-git-commit-15.png)
+
+Update...
+
+Github支持在12分钟后就删除了相关内容，这真的很高效
+
+![](../assets/images/del-git-commit-16.png)
