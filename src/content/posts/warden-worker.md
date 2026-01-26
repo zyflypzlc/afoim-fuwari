@@ -12,92 +12,91 @@ lang: ""
 # 原理
 项目参考开源的 [dani-garcia/vaultwarden: Unofficial Bitwarden compatible server written in Rust, formerly known as bitwarden_rs](https://github.com/dani-garcia/vaultwarden) 将Rust源码编译为WASM以支持在Cloudflare Worker上运行。其中Worker负责REST API，D1负责存储加密后的数据
 
-# 实战
+# 部署
 
-打开Cloudflare https://dash.cloudflare.com/ 
+首先确保你安装了Rust，若无可前往： [安装 Rust - Rust 程序设计语言](https://rust-lang.org/zh-CN/tools/install/)
 
-登录后复制这里的 **账户ID** （CLOUDFLARE_ACCOUNT_ID）
-![](../assets/images/warden-worker-2.png)
+克隆仓库： [afoim/warden-worker: A Bitwarden-compatible server for Cloudflare Workers](https://github.com/afoim/warden-worker)
 
-右上角进入配置文件
-![](../assets/images/warden-worker-1.png)
+创建D1数据库
+```sql
+wrangler d1 create vault1
+```
 
-左上角选择API令牌
-![](../assets/images/warden-worker-3.png)
+![](../assets/images/warden-worker-25.png)
 
-点击创建令牌
-![](../assets/images/warden-worker-4.png)
+替换 **wrangler.jsonc** 的数据库ID
 
-选择 编辑Cloudflare Workers
-![](../assets/images/warden-worker-5.png)
+![](../assets/images/warden-worker-26.png)
 
-创建后 **复制API 令牌** （只会展示一次）（CLOUDFLARE_API_TOKEN）
-![](../assets/images/warden-worker-6.png)
+初始化数据库
 
-回到主页，进入D1数据库
-![](../assets/images/warden-worker-7.png)
+```sql
+wrangler d1 execute warden-sql --remote --file=sql/schema_full.sql
+```
 
-选择 创建数据库
-![](../assets/images/warden-worker-8.png)
+![](../assets/images/warden-worker-27.png)
 
-创建完成后，进入，复制 **D1 数据库 ID**（D1_DATABASE_ID）
+编译Rust WASM
 
-> 由于原项目坑点太多（如：依赖不固定版本导致编译报错，必须设置的环境变量不写白，SQL初始化遇到问题直接跳过）
+```bash
+cargo build --release
+```
+部署 Worker
 
-这里我Fork并二改了一个我的版本，跟着我的步骤走，包你成功！
+```bash
+wrangler deploy
+```
 
-Fork我的仓库（别忘了点个 **Star** ） [afoim/warden-worker: A Bitwarden-compatible server for Cloudflare Workers](https://github.com/afoim/warden-worker/)
+设置白名单邮箱
 
-在仓库设置中添加上述三个机密环境变量
-- `CLOUDFLARE_ACCOUNT_ID`
-- `CLOUDFLARE_API_TOKEN`
-- `D1_DATABASE_ID`
-![](../assets/images/warden-worker-9.png)
+```bash
+wrangler secret put ALLOWED_EMAILS
+```
 
-点击 Action，运行Build工作流
-![](../assets/images/warden-worker-10.png)
+![](../assets/images/warden-worker-29.png)
 
-Build结束，全绿
-![](../assets/images/warden-worker-11.png)
+设置JWT（脸滚键盘即可）
 
-打开Cloudflare D1，查看数据库表
-![](../assets/images/warden-worker-12.png)
+```bash
+wrangler secret put JWT_SECRET
+wrangler secret put JWT_REFRESH_SECRET
+```
 
-如果这里是空的，我们就手动建表
-![](../assets/images/warden-worker-13.png)
+![](../assets/images/warden-worker-30.png)
 
-查看这个文件 [warden-worker/sql/schema.sql at main · afoim/warden-worker](https://github.com/afoim/warden-worker/blob/main/sql/schema.sql)
+设置2FA加密密钥（32字节Base64编码文本）
 
-依次将这3个SQL块进行执行（一定要依次，不能一把梭）。每执行一次你应该都能看到新表的出现
-![](../assets/images/warden-worker-14.png)
-![](../assets/images/warden-worker-15.png)![](../assets/images/warden-worker-16.png)
+```bash
+wrangler secret put TWO_FACTOR_ENC_KEY
+```
 
-进入Workers
-![](../assets/images/warden-worker-17.png)
+Poweshell可以这样生成
 
-进入 warden-worker
-![](../assets/images/warden-worker-18.png)
+```powershell
+[Convert]::ToBase64String((1..32 | ForEach-Object {Get-Random -Minimum 0 -Maximum 256}))
+```
 
-先添加 **自定义域** ，填你的域名，因为 Worker 默认给的域名国内无法访问
-![](../assets/images/warden-worker-19.png)
+![](../assets/images/warden-worker-31.png)
 
-再添加**机密环境变量** （注意不要有空格）
-- `ALLOWED_EMAILS` your-email@example.com 
-- `JWT_SECRET` 随机的长字符串 
-- `JWT_REFRESH_SECRET` 随机的长字符串
-> [!CAUTION]
-> 必须使用Wrangler CLI命令添加机密环境变量，如： `wrangler secret put JWT_SECRET` 这样添加的环境变量不会在新的部署中被覆盖
+前往控制台绑定域名（若路由需要手动写一条解析到Cloudflare）
 
-![](../assets/images/warden-worker-22.png)
+![](../assets/images/warden-worker-28.png)
 
-![](../assets/images/warden-worker-23.png)
+使用移动端Bitwarden创建账号（使用白名单邮箱）
 
-此时打开手机上的 **BitWarden** 软件，在你的自托管上创建账号即可（注意：密码一经设置将无法更改）
-![](../assets/images/Screenshot_2025-11-21-17-53-07-65_edf9c6c5202cf0a.jpg)![](../assets/images/Screenshot_2025-11-21-17-53-04-92_edf9c6c5202cf0a.jpg)![](../assets/images/Screenshot_2025-11-21-17-53-34-66_edf9c6c5202cf0a.jpg)![](../assets/images/Screenshot_2025-11-21-18-32-58-31_edf9c6c5202cf0a.jpg)
+接下来，前往网页端，启用2FA： https://cfbw.2x.nz （用另一个TOTP验证器存储）
 
-> [!CAUTION]
->  ~~值得注意的是，该项目似乎仅实现了手机端的大部分API，而针对于电脑浏览器插件使用的API暂未支持，我们目前正在尝试用AI补全... Just a moment...~~
->  
->  更多注意事项请参阅仓库README
->  
->  已支持电脑端浏览器插件
+*顺便一提，想要修改邮箱或主密码也可以在网页端进行了*
+
+![](../assets/images/warden-worker-32.png)
+
+将所有已登录的设备登出后再登入则会被要求TOTP
+
+# 导入密码库
+
+如果您有旧的密码库，请先前往 **设置 - 密码库选项 - 导出 - .json** 
+
+再登录当前密码库，前往 **设置 - 密码库选项 - 导入 - .json**
+
+![](../assets/images/warden-worker-33.png)
