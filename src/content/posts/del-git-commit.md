@@ -112,3 +112,59 @@ git push -u origin main -f
 ```
 
 此时，大功告成。自此时起，所有用户都已经看不到那个你不想让别人看到的文件与提交记录了，就像它从未存在过
+
+*真的吗？*
+
+如果说，有些人仍留存着你仓库提交的完整 **commit id** ，那他们可以通过该链接访问到那个你想隐藏的提交，只不过Github会弹出警告： **This commit does not belong to any branch on this repository, and may belong to a fork outside of the repository.（此提交不属于此仓库的任何分支，可能属于仓库外的某个分支副本。）** 
+```bash
+https://github.com/{user}/{repo}/commit/{commit id}
+```
+
+如果想完全从Github上删除，你需要向Github提交支持工单： [GitHub 支持](https://support.github.com/)
+
+点击我的工单
+
+![](../assets/images/del-git-commit-10.png)
+
+新工单
+
+![](../assets/images/del-git-commit-11.png)
+
+从我拥有或控制的存储库中删除数据
+
+![](../assets/images/del-git-commit-12.png)
+
+删除其他数据
+
+![](../assets/images/del-git-commit-13.png)
+
+接下来填写工单，你可以参考我的主题与正文（生成与 OpenAI ChatGPT 5.2）
+
+```bash
+Title:Request to Remove an Orphaned Commit URL Containing Sensitive Information
+
+Hello GitHub Support Team,
+
+I am writing to request the removal of the following commit page from GitHub’s website:
+
+https://github.com/{user}/{repo}/commit/{commit id}
+
+This commit has already been removed from my local repository history and I have force-pushed the updated history to the GitHub remote repository. As a result, the commit is now orphaned and no longer reachable from any branch or tag.
+
+However, the commit page itself is still accessible via its direct URL. Unfortunately, this commit contained sensitive information, and I would like to request that GitHub remove this URL from the website to prevent further access.
+
+Please let me know if you need any additional information or verification from my side to proceed with this request.
+
+Thank you very much for your time and assistance.
+
+Best regards,  
+{user}
+```
+
+![](../assets/images/del-git-commit-14.png)
+
+最后点击 **Continue** ，新版工单系统会自动使用Copilot为你生成一些帮助信息，等他BB完，我们继续创建即可
+
+马上，你就会收到一封来自Github的邮件，表示Github已经收到您的工单。耐心等待Github的下一步回复即可
+
+![](../assets/images/del-git-commit-15.png)
