@@ -251,10 +251,6 @@
                 </div>
                 ${isUpdated && post.diff ? `
                 <div id="${safeId}" class="hidden mt-2 p-2 bg-gray-50 dark:bg-gray-800 rounded text-xs overflow-x-auto border border-gray-200 dark:border-gray-700 max-h-60 overflow-y-auto">
-                    <div class="grid grid-cols-2 gap-2 mb-2 sticky top-0 bg-gray-50 dark:bg-gray-800 z-10">
-                        <div class="text-center font-bold text-red-600 dark:text-red-400 border-b border-red-200 dark:border-red-900/50 pb-1">变更前</div>
-                        <div class="text-center font-bold text-green-600 dark:text-green-400 border-b border-green-200 dark:border-green-900/50 pb-1">变更后</div>
-                    </div>
                     ${post.diff.map(part => {
                         const colorClass = part.added ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 block my-1 p-1 rounded break-all whitespace-pre-wrap' :
                                          part.removed ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 block my-1 p-1 rounded break-all whitespace-pre-wrap' :
