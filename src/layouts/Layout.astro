@@ -233,31 +233,55 @@ const bannerOffset =
 
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
-		<!-- Umami -->
-		<script defer src="https://umami.acofork.com/script.js" data-website-id="5d710dbd-3a2e-43e3-a553-97b415090c63" data-swup-ignore-script></script>
 
+	</head>
+	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
+		  data-overlayscrollbars-initialize
+	>
+
+<!-- Cookie Consent by TermsFeed https://www.TermsFeed.com -->
+<script type="text/javascript" src="https://www.termsfeed.com/public/cookie-consent/4.2.0/cookie-consent.js" charset="UTF-8"></script>
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","palette":"dark","language":"en","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false,"website_name":"AcoFork Blog","website_privacy_policy_url":"https://blog.acofork.com/privacy-policy"});
+});
+</script>
+
+<!-- Basic Analytics -->
+<!-- Umami -->
+<script type="text/plain" data-cookie-consent="strictly-necessary" defer src="https://umami.acofork.com/script.js" data-website-id="5d710dbd-3a2e-43e3-a553-97b415090c63" data-swup-ignore-script></script>
+<!-- end of Basic Analytics-->
+
+<!-- Google Analytics -->
 		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-YG02LLPGWC"></script>
-		<script>
+		<script type="text/plain" data-cookie-consent="tracking" async src="https://www.googletagmanager.com/gtag/js?id=G-YG02LLPGWC"></script>
+		<script type="text/plain" data-cookie-consent="tracking">
   		window.dataLayer = window.dataLayer || [];
   		function gtag(){dataLayer.push(arguments);}
   		gtag('js', new Date());
   		gtag('config', 'G-YG02LLPGWC');
 		</script>
+<!-- end of Google Analytics-->
 
-		<!-- Microsoft Clarity -->
-		<script type="text/javascript">
+<!-- Microsoft Clarity -->
+		<script type="text/plain" data-cookie-consent="tracking">
     	(function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     	})(window, document, "clarity", "script", "v94yrasi99");
 		</script>
+<!-- end of Site Experience & Interaction Analytics-->
 
-	</head>
-	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
-		  data-overlayscrollbars-initialize
-	>
+<!-- Google Adsense -->
+<script type="text/plain" data-cookie-consent="targeting" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1683686345039700"
+     crossorigin="anonymous"></script>
+<!-- end of Google Adsense-->
+
+<noscript>Free cookie consent management tool by <a href="https://www.termsfeed.com/">TermsFeed</a></noscript>
+<!-- End Cookie Consent by TermsFeed https://www.TermsFeed.com -->
+
+
 		<noscript>
 			<style>
 				#bg-box {
@@ -672,106 +696,7 @@ if (window.swup) {
 }
 </script>
 
-<script is:inline>
-    // Giscus Loader
-    function loadGiscus() {
-        console.log('[Giscus] Attempting to load Giscus...');
-        const container = document.getElementById('giscus-container');
-        if (!container) {
-            console.log('[Giscus] No container found, skipping.');
-            return;
-        }
-        
-        // Prevent double loading if script is already there
-        if (container.querySelector('script[src*="giscus"]')) {
-             console.log('[Giscus] Script already exists, skipping.');
-             return;
-        }
 
-        console.log('[Giscus] Container found, creating script...');
-        const script = document.createElement('script');
-        script.src = "https://giscus.app/client.js";
-        script.async = true;
-        script.crossOrigin = "anonymous";
-
-        // Required attributes
-        const requiredAttrs = [
-            'repo', 'repoId', 'category', 'categoryId', 
-            'mapping', 'strict', 'reactionsEnabled', 
-            'emitMetadata', 'inputPosition', 'lang', 'loading'
-        ];
-
-        requiredAttrs.forEach(attr => {
-            if (container.dataset[attr]) {
-                const kebab = attr.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
-                script.setAttribute(`data-${kebab}`, container.dataset[attr]);
-            }
-        });
-
-        // Theme handling
-        const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-        console.log(`[Giscus] Setting initial theme to: ${theme}`);
-        script.setAttribute('data-theme', theme);
-
-        container.appendChild(script);
-        console.log('[Giscus] Script appended to container.');
-    }
-
-    function initGiscus() {
-        console.log('[Giscus] initGiscus called.');
-        loadGiscus();
-        
-        // Listen for Swup navigation
-        // Use a polling mechanism to wait for swup if it's not immediately available
-        const checkSwup = setInterval(() => {
-            if (window.swup) {
-                console.log('[Giscus] Swup detected via polling, registering hooks.');
-                clearInterval(checkSwup);
-                
-                window.swup.hooks.on('page:view', () => {
-                    console.log('[Giscus] Swup page:view triggered.');
-                    loadGiscus();
-                });
-                
-                // Also listen for content:replace to be safe, as page:view might sometimes fire before content is fully swapped in edge cases
-                window.swup.hooks.on('content:replace', () => {
-                    console.log('[Giscus] Swup content:replace triggered.');
-                    // Small delay to ensure DOM is ready
-                    setTimeout(loadGiscus, 0);
-                });
-
-            } else {
-                console.log('[Giscus] Waiting for Swup...');
-            }
-        }, 200);
-        
-        // Stop polling after 5 seconds to prevent infinite loop
-        setTimeout(() => clearInterval(checkSwup), 5000);
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initGiscus);
-    } else {
-        initGiscus();
-    }
-    
-    // Global theme observer
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                const iframe = document.querySelector('iframe.giscus-frame');
-                if (iframe) {
-                    const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-                    console.log(`[Giscus] Theme changed to: ${theme}, updating iframe.`);
-                    iframe.contentWindow.postMessage({
-                        giscus: { setConfig: { theme: theme } }
-                    }, 'https://giscus.app');
-                }
-            }
-        });
-    });
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-</script>
 
 <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
   <defs>
