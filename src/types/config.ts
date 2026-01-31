@@ -126,7 +126,7 @@ export type GitHubEditConfig = {
 
 export type NoticeConfig = {
     enable: boolean;
-    level: "info" | "note" | "tip" | "caution" | "warning" | "important";
+    level: "info" | "note" | "tip" | "happy" | "caution" | "warning" | "important";
     content: string;
 };
 
