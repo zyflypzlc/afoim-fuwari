@@ -12,7 +12,7 @@ import type {
 import { LinkPreset } from "./types/config";
 
 export const noticeConfig: NoticeConfig = {
-    enable: true,
+    enable: false,
     level: "happy",
     content: "元宝发红包了！看置顶文章！",
 };
