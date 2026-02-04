@@ -34,7 +34,7 @@ pip install git-filter-repo
 执行后它会查找该文件所在仓库的所有提交，并仅将该文件剔除，若某一提交中仅对该文件做了更改，则一整条提交直接消失（因为提交中无文件更改）；若某一提交中除了对该文件做了更改，还有其他文件，则该条提交仍然存在，但是文件变更记录中不再有该文件
 
 ```bash
-git filter-repo --force --path src/secret.txt --invert-paths
+git-filter-repo --force --path src/secret.txt --invert-paths
 ```
 
 比如这里我们一不小心提交了个 **微信密码** 
@@ -44,7 +44,7 @@ git filter-repo --force --path src/secret.txt --invert-paths
 我们可以用该命令将其 **剔除** 
 
 ```bash
-git filter-repo --force --path 微信密码.txt --invert-paths
+git-filter-repo --force --path 微信密码.txt --invert-paths
 ```
 
 
