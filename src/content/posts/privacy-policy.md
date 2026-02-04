@@ -11,17 +11,18 @@ lang: ""
 
 ### Strictly necessary cookies（必要的cookies）
 
-- Umami：收集站点的基本访问情况，并对外显示浏览量，由本站直接提供
-- Giscus：提供评论功能，由 Github 提供
+- [Umami](https://umami.acofork.com)：收集站点的基本访问情况，并对外显示浏览量，由本站直接提供
+- [Giscus](https://giscus.app)：提供评论功能，由 Github 提供
 
 ### Functionality cookies（功能性cookies）
 - 无
 
 ### Tracking cookies（追蹤cookies）
-- Google Analytics：收集站点访问情况，由 Google 提供
-- Microsoft Clarity：收集站点访问情况，由 Microsoft 提供
+- [百度统计](https://tongji.baidu.com/)：收集站点的基本访问情况
+- [Google Analytics](https://analytics.google.com)：收集站点访问情况
+- [Microsoft Clarity](https://clarity.microsoft.com)：收集站点访问情况
 
 ### Targeting and advertising cookies（定位和廣告cookies）
-- Google Adsense：提供广告服务，由 Google 提供
+- [Google Adsense](https://adsense.google.com/)：提供广告服务
 
-*latest update: 2026/01/30*
+*latest update: 2026/02/04*
