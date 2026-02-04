@@ -23,7 +23,7 @@
 
 <div id="new-post-notification" class="fixed bottom-4 right-4 z-50 flex flex-col items-end pointer-events-none">
     <!-- Minimized State (Bell Icon) -->
-    <button id="notification-minimized" class="pointer-events-auto bg-[var(--card-bg)] border border-[var(--primary)] text-[var(--primary)] p-3 rounded-full shadow-lg transform translate-y-20 opacity-0 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-110 active:scale-95 flex items-center justify-center relative group">
+    <button id="notification-minimized" aria-label="New post notification" class="pointer-events-auto bg-[var(--card-bg)] border border-[var(--primary)] text-[var(--primary)] p-3 rounded-full shadow-lg transform translate-y-20 opacity-0 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-110 active:scale-95 flex items-center justify-center relative group">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
         <span id="notification-dot" class="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full border-2 border-[var(--card-bg)] hidden animate-pulse"></span>
     </button>

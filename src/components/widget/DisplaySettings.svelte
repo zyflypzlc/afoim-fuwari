@@ -168,7 +168,7 @@ onMount(() => {
         >
             禁用背景
         </div>
-        <input type="checkbox" class="toggle-switch" checked={hideBg} on:change={toggleHideBg} />
+        <input aria-label="Hide Background" type="checkbox" class="toggle-switch" checked={hideBg} on:change={toggleHideBg} />
     </div>
 
     <div class="flex flex-row gap-2 mb-3 items-center justify-between">
@@ -178,7 +178,7 @@ onMount(() => {
         >
             彩虹模式
         </div>
-        <input type="checkbox" class="toggle-switch" checked={isRainbowMode} on:change={toggleRainbow} />
+        <input aria-label="Rainbow Mode" type="checkbox" class="toggle-switch" checked={isRainbowMode} on:change={toggleRainbow} />
     </div>
 
     {#if isRainbowMode}
@@ -228,7 +228,7 @@ onMount(() => {
         >
             开发模式
         </div>
-        <input type="checkbox" class="toggle-switch" checked={isDevMode} on:change={toggleDevMode} />
+        <input aria-label="Developer Mode" type="checkbox" class="toggle-switch" checked={isDevMode} on:change={toggleDevMode} />
     </div>
 
     {#if isDevMode}
