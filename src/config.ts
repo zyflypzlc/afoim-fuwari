@@ -64,7 +64,7 @@ export const siteConfig: SiteConfig = {
 		},
 	],
 	officialSites: [
-		{ url: "https://blog.acofork.com", alias: "CN" },
+		{ url: "https://acofork.com", alias: "CN" },
 		{ url: "https://2x.nz", alias: "Global" },
 	],
 	server: [
