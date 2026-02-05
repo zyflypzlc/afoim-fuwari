@@ -69,8 +69,8 @@ export const siteConfig: SiteConfig = {
 	],
 	server: [
 		{ url: "", text: "Blog" },
-		{ url: "https://umami.acofork.com", text: "Umami" },
-		{ url: "https://pic1.acofork.com", text: "RandomPic" },
+		{ url: "https://u.2x.nz", text: "Umami" },
+		{ url: "https://p.2x.nz", text: "RandomPic" },
 	],
 };
 
