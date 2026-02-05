@@ -38,7 +38,7 @@ export default defineConfig({
 	redirects: {
 		"/privacy-policy": {
 			status: 302,
-			destination: "https://acofork.com/posts/privacy-policy/",
+			destination: "https://2x.nz/posts/privacy-policy/",
 		},
 		"/long": {
 			status: 302,
