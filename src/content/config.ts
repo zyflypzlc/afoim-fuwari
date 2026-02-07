@@ -20,6 +20,14 @@ const postsCollection = defineCollection({
 	}),
 });
 
+const specCollection = defineCollection({
+	schema: z.object({
+		enable: z.boolean().optional().default(true),
+		level: z.string().optional().default("info"),
+	}),
+});
+
 export const collections = {
 	posts: postsCollection,
+	spec: specCollection,
 };

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "posts/watermark.md",
+                "file": "spec/announcement.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "watermark"
+              "title": "announcement"
             }
           },
           {
@@ -185,8 +185,14 @@
   },
   "active": "f6b5e7abc96521b9",
   "lastOpenFiles": [
-    "posts/del-git-commit.md",
+    "assets/images/afc68c43e47a573dfa29ced41b56e3ce.jpg",
     "posts/watermark.md",
+    "spec/announcement.md",
+    "spec",
+    "assets/images/imiss5.jpg",
+    "assets/images/imis.jpg",
+    "posts/announcement.md",
+    "posts/del-git-commit.md",
     "assets/images/屏幕截图2025-08-09213908.png",
     "assets/images/zte-f450-bridge-4.png",
     "assets/images/zte-f450-bridge-3.png",
@@ -194,9 +200,6 @@
     "assets/images/zte-f450-bridge.png",
     "assets/images/wx-zfb-card.png",
     "assets/images/win11-to-win10-15.png",
-    "assets/images/win11-to-win10-13.png",
-    "assets/images/win11-to-win10-11.png",
-    "assets/images/win11-to-win10-8.png",
     "assets/images - 副本",
     "posts/improve-seo.md",
     "posts/privacy-policy.md",
@@ -218,8 +221,6 @@
     "posts/ghedu-free-name.md",
     "posts/ghedu-free-me.md",
     "posts/eopf-github-proxy.md",
-    "posts/mac-gal.md",
-    "posts/self-host-matrix.md",
-    "posts/gal.md"
+    "posts/mac-gal.md"
   ]
 }
