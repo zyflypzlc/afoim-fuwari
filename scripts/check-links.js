@@ -30,10 +30,15 @@ const stats = {
     errors: []
 };
 
-function checkUrl(url) {
+function checkUrl(url, redirectCount = 0) {
     return new Promise((resolve) => {
         if (!url) {
-            resolve({ ok: false, status: 'Missing URL' });
+            resolve({ ok: false, status: 'Missing URL', redirectCount });
+            return;
+        }
+
+        if (redirectCount > 5) {
+            resolve({ ok: false, status: 'Too many redirects', redirectCount });
             return;
         }
 
@@ -62,21 +67,27 @@ function checkUrl(url) {
             // Consume response data to free up memory (since we switched to GET)
             res.resume();
             
-            // Consider 2xx and 3xx as success
-            if (res.statusCode >= 200 && res.statusCode < 400) {
-                resolve({ ok: true, status: res.statusCode });
+            if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+                const redirectUrl = new URL(res.headers.location, url).href;
+                checkUrl(redirectUrl, redirectCount + 1).then(resolve);
+                return;
+            }
+
+            // Consider 2xx as success (redirects handled above)
+            if (res.statusCode >= 200 && res.statusCode < 300) {
+                resolve({ ok: true, status: res.statusCode, redirectCount });
             } else {
-                resolve({ ok: false, status: res.statusCode });
+                resolve({ ok: false, status: res.statusCode, redirectCount });
             }
         });
 
         req.on('error', (err) => {
-            resolve({ ok: false, status: err.message });
+            resolve({ ok: false, status: err.message, redirectCount });
         });
 
         req.on('timeout', () => {
             req.destroy();
-            resolve({ ok: false, status: 'Timeout' });
+            resolve({ ok: false, status: 'Timeout', redirectCount });
         });
 
         req.end();
@@ -89,35 +100,56 @@ async function processFile(filePath, type) {
         const data = JSON.parse(content);
         const name = data.name || path.basename(filePath, '.json');
         
+        let urlResult = { status: 'N/A', redirectCount: 0 };
+        let avatarResult = { status: 'N/A', redirectCount: 0 };
+        let hasError = false;
+
         // Check URL (for friends)
         if (data.url) {
             stats.total++;
-            process.stdout.write(`Checking URL for ${colors.cyan}${name}${colors.reset}... `);
-            const result = await checkUrl(data.url);
-            if (result.ok) {
-                console.log(`${colors.green}OK (${result.status})${colors.reset}`);
+            urlResult = await checkUrl(data.url);
+            if (urlResult.ok) {
                 stats.success++;
             } else {
-                console.log(`${colors.red}FAILED (${result.status})${colors.reset} -> ${data.url}`);
                 stats.failed++;
-                stats.errors.push({ type, name, field: 'url', value: data.url, error: result.status });
+                hasError = true;
+                stats.errors.push({ type, name, field: 'url', value: data.url, error: urlResult.status });
             }
         }
 
         // Check Avatar
         if (data.avatar) {
             stats.total++;
-            process.stdout.write(`Checking Avatar for ${colors.cyan}${name}${colors.reset}... `);
-            const result = await checkUrl(data.avatar);
-            if (result.ok) {
-                console.log(`${colors.green}OK (${result.status})${colors.reset}`);
+            avatarResult = await checkUrl(data.avatar);
+            if (avatarResult.ok) {
                 stats.success++;
             } else {
-                console.log(`${colors.red}FAILED (${result.status})${colors.reset} -> ${data.avatar}`);
                 stats.failed++;
-                stats.errors.push({ type, name, field: 'avatar', value: data.avatar, error: result.status });
+                hasError = true;
+                stats.errors.push({ type, name, field: 'avatar', value: data.avatar, error: avatarResult.status });
             }
         }
+
+        // Format output
+        // abc的博客：url：200， avatar: 200（重定向共X次）
+        let output = `${colors.cyan}${name}${colors.reset}：`;
+        
+        if (data.url) {
+            const statusColor = urlResult.ok ? colors.green : colors.red;
+            output += `url：${statusColor}${urlResult.status}${colors.reset}`;
+        }
+
+        if (data.avatar) {
+            const statusColor = avatarResult.ok ? colors.green : colors.red;
+            output += `， avatar: ${statusColor}${avatarResult.status}${colors.reset}`;
+        }
+
+        const totalRedirects = (urlResult.redirectCount || 0) + (avatarResult.redirectCount || 0);
+        if (totalRedirects > 0) {
+            output += `（重定向共${totalRedirects}次）`;
+        }
+
+        console.log(output);
 
     } catch (err) {
         console.error(`${colors.red}Error processing file ${filePath}: ${err.message}${colors.reset}`);
