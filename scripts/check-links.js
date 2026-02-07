@@ -132,6 +132,14 @@ async function processFile(filePath, type) {
         const data = JSON.parse(content);
         const name = data.name || path.basename(filePath, '.json');
         
+        // Skip check if vip is true
+        if (data.vip) {
+            console.log(`${colors.cyan}${name}${colors.reset}：${colors.yellow}VIP (Skipped)${colors.reset}`);
+            stats.total++;
+            stats.success++; // Count as success to avoid triggering failure report
+            return;
+        }
+
         let urlResult = { status: 'N/A', redirectCount: 0 };
         let avatarResult = { status: 'N/A', redirectCount: 0 };
         let hasError = false;

@@ -5,6 +5,9 @@ on:
     - cron: '0 0 */30 * *' # Run every 30 days
   workflow_dispatch: # Allow manual trigger
 
+permissions:
+  contents: write
+
 jobs:
   check-links:
     runs-on: ubuntu-latest
