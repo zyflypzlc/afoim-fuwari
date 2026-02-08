@@ -16,6 +16,7 @@ const __dirname = path.dirname(__filename);
 
 const CONTENT_DIR = path.join(process.cwd(), "src/content");
 const POSTS_DIR = path.join(CONTENT_DIR, "posts");
+const SPEC_DIR = path.join(CONTENT_DIR, "spec");
 const ASSETS_DIR = path.join(CONTENT_DIR, "assets/images");
 
 // 支持的图片格式
@@ -34,8 +35,11 @@ const IMAGE_EXTENSIONS = [
  */
 async function getAllMarkdownFiles() {
 	try {
-		const pattern = path.join(POSTS_DIR, "**/*.md").replace(/\\/g, "/");
-		return await glob(pattern);
+		const postsPattern = path.join(POSTS_DIR, "**/*.md").replace(/\\/g, "/");
+		const specPattern = path.join(SPEC_DIR, "**/*.md").replace(/\\/g, "/");
+		const postsFiles = await glob(postsPattern);
+		const specFiles = await glob(specPattern);
+		return [...postsFiles, ...specFiles];
 	} catch (error) {
 		console.error("获取 markdown 文件失败:", error.message);
 		return [];
@@ -153,8 +157,8 @@ async function cleanUnusedImages() {
 	console.log("🔍 开始扫描未使用的图片资源...");
 
 	// 检查目录是否存在
-	if (!fs.existsSync(POSTS_DIR)) {
-		console.error(`❌ Posts 目录不存在: ${POSTS_DIR}`);
+	if (!fs.existsSync(POSTS_DIR) && !fs.existsSync(SPEC_DIR)) {
+		console.error(`❌ Posts 和 Spec 目录都不存在`);
 		return;
 	}
 
